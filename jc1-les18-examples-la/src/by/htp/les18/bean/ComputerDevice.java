@@ -16,12 +16,13 @@ public class ComputerDevice extends Appliance  implements Serializable  {
 		super();
 		
 	}
-	public ComputerDevice(int batteryCapacity, int memoryROM, int displayInches) {
-		super();
+	public ComputerDevice(String name,int price,int batteryCapacity, int memoryROM, int displayInches) {
+		super(name,price);
 		this.batteryCapacity = batteryCapacity;
 		this.memoryROM = memoryROM;
 		this.displayInches = displayInches;
 	}
+	
 	
 	
 	public int getBatteryCapacity() {

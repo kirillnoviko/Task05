@@ -6,69 +6,69 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import by.htp.les18.bean.Appliance;
 import by.htp.les18.dao.DAOException;
 import by.htp.les18.dao.FindApplianceDAO;
-import by.htp.les18.dao.command.Command;
-import by.htp.les18.dao.command.CommandProvider;
+import by.htp.les18.dao.creator.Creator;
+import by.htp.les18.dao.creator.CreatorProvider;
 
 public class FileFindApplianceDAO implements FindApplianceDAO {
 
-	private final CommandProvider provider = new CommandProvider();
+	private final CreatorProvider provider = new CreatorProvider();
+
+	private static final String SOURCE_PATH = "\\resources\\appliances.db";
+	private static final String SOURCE_DEVIDER_APPLIANCE_PROPERTY = "\\s+:\\s+";
+
+	private final static int NAME_CATEGORY_INDEX = 0;
+	private final static int ALL_PROPERTIES = 1;
 
 	@Override
+
 	public List<Appliance> findByCategory(String name) throws DAOException {
 
-		BufferedReader br;
-		String st;
-		File file;
-		String[] temp;
-		List<Appliance> result;
+		BufferedReader applianceSourceReader = null;
+		String oneApplianceFullData = null;
 
-		br = null;
-		st = null;
+		String[] applianceProperties = null;
 
-		// file= new File(getClass().getResource("appliances.db").getFile());
-		
+		Creator applianceCreator = null;
+		List<Appliance> results = new ArrayList<Appliance>();
+
 		try {
-			
-			file = new File("E:\\eclipseProject\\jc1-les18-examples-la\\resources\\appliances.db");
-			br = new BufferedReader(new FileReader(file));
+			applianceSourceReader = new BufferedReader(new FileReader(new File(SOURCE_PATH)));
 
+			applianceCreator = provider.getCreator(name);
+
+			while ((oneApplianceFullData = applianceSourceReader.readLine()) != null) {
+
+				applianceProperties = oneApplianceFullData.split(SOURCE_DEVIDER_APPLIANCE_PROPERTY);
+
+				if (applianceProperties[NAME_CATEGORY_INDEX].equals(name)) {
+					results.add(applianceCreator.createApp(applianceProperties[ALL_PROPERTIES]));
+				}
+			}
+			
 		} catch (FileNotFoundException e) {
 			throw new DAOException(e);
-		}
-
-		result = new ArrayList<Appliance>();
-		Command command = null;
-
-		command = provider.getCommand(name.toLowerCase());
-
-		try {
-
-			while ((st = br.readLine()) != null) {
-
-				temp = st.split("\\s+:\\s+");
-
-				if (temp[0].equals(name)) {
-
-					result.add(command.execute(temp[1].toString()));
-
-				}
-
-			}
-
 		} catch (IOException e) {
 			throw new DAOException(e);
-		}
-		
-		if(result.isEmpty()) {
-			throw new DAOException("category is empty");
+		} finally {
+			if (applianceSourceReader != null) {
+				try {
+					applianceSourceReader.close();
+				} catch (IOException e) {
+					throw new DAOException(e);
+				}
+			}
 		}
 
-		return result;
+		if (results.isEmpty()) {
+			results = Collections.emptyList();
+		}
+
+		return results;
 	}
-
 }

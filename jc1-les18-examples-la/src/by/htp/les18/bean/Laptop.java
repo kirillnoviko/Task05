@@ -19,8 +19,8 @@ public class Laptop extends ComputerDevice  implements Serializable {
 	}
 
 
-	public Laptop(int batteryCapacity, int memoryROM, int displayInches) {
-		super(batteryCapacity, memoryROM, displayInches);
+	public Laptop(String name,int price,int batteryCapacity, int memoryROM, int displayInches) {
+		super(name,price,batteryCapacity, memoryROM, displayInches);
 	
 	}
 
@@ -32,8 +32,8 @@ public class Laptop extends ComputerDevice  implements Serializable {
 		this.cPU = cPU;
 	}
 	
-	public Laptop(int batteryCapacity, int memoryROM, int displayInches, String operatingSystem, int systemMemory, double cPU) {
-		super(batteryCapacity, memoryROM, displayInches);
+	public Laptop(String name,int price,int batteryCapacity, int memoryROM, int displayInches, String operatingSystem, int systemMemory, double cPU) {
+		super(name,price,batteryCapacity, memoryROM, displayInches);
 		this.operatingSystem = operatingSystem;
 		this.systemMemory = systemMemory;
 		this.cPU = cPU;

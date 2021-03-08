@@ -17,15 +17,15 @@ public class ApplianceController implements Controller{
 		
 		Command command;
 		command = provider.getCommand(commandName);
-		
-		String response;
+	
+		String response=null;
 		
 		try {
 			response = command.execute(newRequest);
 		} catch (ControllerException e) {
 			response=e.toString();
 		}
-		
+	
 		return response;
 
 	}

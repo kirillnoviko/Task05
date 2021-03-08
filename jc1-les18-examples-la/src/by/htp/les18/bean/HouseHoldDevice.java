@@ -14,8 +14,8 @@ public class HouseHoldDevice extends Appliance  implements Serializable{
 		super();
 		
 	}
-	public HouseHoldDevice(int powerConcumption) {
-		super();
+	public HouseHoldDevice(int powerConcumption,String name,int price) {
+		super(name,price);
 		this.powerConcumption = powerConcumption;
 	}
 	public int getPowerConcumption() {

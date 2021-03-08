@@ -24,6 +24,17 @@ public class AudioDevice extends Appliance  implements Serializable  {
 	public AudioDevice() {
 		super();
 	}
+	
+	public AudioDevice( String name,int price, int powerConsumption, int numberOfSpeakers, double[] frequencyRange) {
+		super(name,price);
+		this.powerConsumption = powerConsumption;
+		this.numberOfSpeakers = numberOfSpeakers;
+		this.frequencyRange = frequencyRange;
+	}
+
+	public AudioDevice( String name, int price) {
+		super(name,price);
+	}
 
 	public int getPowerConsumption() {
 		return powerConsumption;

@@ -17,8 +17,8 @@ public class Oven  extends HouseHoldDevice  implements Serializable {
 		super();
 		
 	}
-	public Oven(int powerConcumption) {
-		super(powerConcumption);
+	public Oven(int powerConcumption,String name,int price) {
+		super(powerConcumption,name,price);
 	
 	}
 	public Oven(int weight, int capacity, int depth, double height, double width) {
@@ -30,8 +30,8 @@ public class Oven  extends HouseHoldDevice  implements Serializable {
 		this.width = width;
 	}
 	
-	public Oven(int powerConcumption, int weight, int capacity, int depth, double height, double width) {
-		super(powerConcumption);
+	public Oven(String name,int price, int powerConcumption, int weight, int capacity, int depth, double height, double width) {
+		super(powerConcumption,name,price);
 		this.weight = weight;
 		this.capacity = capacity;
 		this.depth = depth;

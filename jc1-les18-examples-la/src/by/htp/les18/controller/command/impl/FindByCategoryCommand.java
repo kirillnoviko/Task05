@@ -12,35 +12,38 @@ import by.htp.les18.service.WarehouseService;
 public class FindByCategoryCommand implements Command {
 
 	@Override
-	public String execute(String request) throws ControllerException{
+	public String execute(String request) throws ControllerException {
+		{
+			
+			String nameCategory;
+			String response;
+			
+			response="";
+			nameCategory = request.split("\\s+=\\s+")[1];
+			
+			
+			ServiceProvider provider = ServiceProvider.getInstance();
+			WarehouseService warehouseService = provider.getWarehouseService();
 		
-		String nameCategory;
-		String response;
+			
+			List<Appliance> result;
+			
+			try {
+				result = warehouseService.findByCategory(nameCategory);
+			} catch (ServiceException e) {
+				throw new ControllerException(e);
+			}
+			
+			
+			for(Appliance res : result) {
+				response=response + " \n " + res.toString();
+			}
+			
+			
+			return response;
 		
-		response="";
-		nameCategory = request.split("\\s+=\\s+")[1];
-		
-		
-		ServiceProvider provider = ServiceProvider.getInstance();
-		WarehouseService warehouseService = provider.getWarehouseService();
-	
-		
-		List<Appliance> result;
-		
-		try {
-			result = warehouseService.findByCategory(nameCategory);
-		} catch (ServiceException e) {
-			throw new ControllerException(e);
 		}
-		
-		
-		for(Appliance res : result) {
-			response=response + " \n " + res.toString();
-		}
-		
-		
-		return response;
-	
 	}
-
 }
+
+

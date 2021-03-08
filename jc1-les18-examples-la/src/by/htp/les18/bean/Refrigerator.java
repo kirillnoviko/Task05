@@ -19,8 +19,8 @@ public class Refrigerator extends HouseHoldDevice  implements Serializable {
 	
 	}
 	
-	public Refrigerator(int powerConcumption) {
-		super(powerConcumption);
+	public Refrigerator(int powerConcumption, String name,int price) {
+		super(powerConcumption,name,price);
 		
 	}
 	
@@ -33,8 +33,8 @@ public class Refrigerator extends HouseHoldDevice  implements Serializable {
 		this.width = width;
 	}
 	
-	public Refrigerator(int powerConcumption, int weight, int frezerCapacity, double overallCapacity, int height, int width) {
-		super(powerConcumption);
+	public Refrigerator(String name,int price,int powerConcumption, int weight, int frezerCapacity, double overallCapacity, int height, int width) {
+		super(powerConcumption,name,price);
 		this.weight = weight;
 		this.frezerCapacity = frezerCapacity;
 		this.overallCapacity = overallCapacity;

@@ -23,7 +23,13 @@ public class LoginationCommand implements Command {
 		login = params[0].split("\\s+=\\s+")[1];
 		password = params[1].split("\\s+=\\s+")[1];
 		
-		ServiceProvider provider = ServiceProvider.getInstance();
+		ServiceProvider provider = null;
+		try {
+			provider = ServiceProvider.getInstance();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		ClientService clientService = provider.getClientService();
 	
 		boolean result = false;

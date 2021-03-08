@@ -35,7 +35,7 @@ public class ChangeProfileCommand implements Command {
 	
 		
 		try {
-			clientService.changeProfile(new User(firstName,secondName,login,password));
+			clientService.changeProfile(new User(password, password, password, password));
 		} catch (ServiceException e) {
 			throw new ControllerException(e);
 		}
